@@ -16,6 +16,7 @@ func main() {
 	sessionToken := authentication.GetAuth(user_cfg)
 	manga := feed.GetFollowedMangaFeedList(sessionToken)
 	lastRunTime := config.ParseLastRunTime(app_cfg)
+	lastIndex := len(manga) - 1
 
 	for i, element := range manga {
 		chapterPublishDate := title.ParsePublishDate(element["publishedDate"])
@@ -25,10 +26,16 @@ func main() {
 		}
 
 		emailBody := gomail.PrepMessageBody(element)
-		fmt.Println(gomail.SendEmailSMTP(to_email, emailBody, element["title"], user_cfg))
-		fmt.Println("Alert sent for " + element["title"] + " Chapter " + element["chapter"] + ".")
+		alert, err := gomail.SendEmailSMTP(to_email, emailBody, element["title"], user_cfg)
+
+		if err == nil && alert {
+			fmt.Println("Alert sent for " + element["title"] + " Chapter " + element["chapter"] + ".")
+		} else {
+			fmt.Println("Failed to send alert for " + element["title"] + " Chapter " + element["chapter"] + ".")
+		}
+
 		//If we're in the last item in the array update the app ini to include the last publish date of the manga for next run
-		if i == len(manga)-1 {
+		if i == lastIndex {
 			config.UpdateAppIni(chapterPublishDate)
 		}
 	}
