@@ -67,9 +67,7 @@ func GetFollowedMangaFeedList(token string) []map[string]string {
 		localOutputMap["chapter"] = chapterNum
 		localOutputMap["url"] = chapterUrl
 		localOutputMap["publishedDate"] = parsedPublishDate.Format(time.RFC3339)
-		//printOutput := "Title:" + mangaTitle + ": " + "\t\tChapter " + chapterNum + ". URL: " + chapterUrl
 		outputArray = append(outputArray, localOutputMap)
-		//fmt.Println(printOutput)
 	}
 	return outputArray
 }

@@ -25,19 +25,20 @@ func GetAuth(cfg *ini.File) string {
 
 	fmt.Println("Authentication Response status:", resp.Status)
 
+	if resp.Status != "200 OK" {
+		fmt.Println("Authentication failed. Exiting.")
+		panic(err)
+	}
+
 	body, err := ioutil.ReadAll(resp.Body)
 
 	if err != nil {
 		panic(err)
 	}
 
-	//Parse json response
-	//fmt.Println(body)
 	var result AuthOutput
 	json.Unmarshal([]byte(body), &result)
-	//fmt.Println(result)
 	sessionToken := result.Token.Session
-	//https://auth0.com/learn/refresh-tokens/
-	//refreshToken := result.Token.Refresh
+
 	return sessionToken
 }

@@ -20,14 +20,14 @@ func main() {
 	for i, element := range manga {
 		chapterPublishDate := title.ParsePublishDate(element["publishedDate"])
 		if lastRunTime.After(chapterPublishDate) {
-			fmt.Println(element["title"] + " Chapter " + element["chapter"] + " is not new. Skipping.")
+			fmt.Println("Skipping alert for " + element["title"] + " Chapter " + element["chapter"] + ".")
 			continue
 		}
 
 		emailBody := gomail.PrepMessageBody(element)
 		fmt.Println(gomail.SendEmailSMTP(to_email, emailBody, element["title"], user_cfg))
-
-		//If we're in the last item in the array update the app ini to include the last publish date of the manga
+		fmt.Println("Alert sent for " + element["title"] + " Chapter " + element["chapter"] + ".")
+		//If we're in the last item in the array update the app ini to include the last publish date of the manga for next run
 		if i == len(manga)-1 {
 			config.UpdateAppIni(chapterPublishDate)
 		}
