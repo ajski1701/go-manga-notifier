@@ -6,19 +6,19 @@ import (
 	"mangadex-notifier/gomail"
 	"mangadex-notifier/mangadex/authentication"
 	"mangadex-notifier/mangadex/manga/feed"
-	"mangadex-notifier/parse"
+	"mangadex-notifier/mangadex/manga/title"
 )
 
 func main() {
 	user_cfg := config.LoadUserIni()
 	app_cfg := config.LoadAppIni()
-	to_email := parse.ParseToEmail(user_cfg)
+	to_email := gomail.ParseToEmail(user_cfg)
 	sessionToken := authentication.GetAuth(user_cfg)
 	manga := feed.GetFollowedMangaFeedList(sessionToken)
-	lastRunTime := parse.ParseLastRunTime(app_cfg)
+	lastRunTime := config.ParseLastRunTime(app_cfg)
 
 	for i, element := range manga {
-		chapterPublishDate := parse.ParsePublishDate(element["publishedDate"])
+		chapterPublishDate := title.ParsePublishDate(element["publishedDate"])
 		if lastRunTime.After(chapterPublishDate) {
 			fmt.Println(element["title"] + " Chapter " + element["chapter"] + " is not new. Skipping.")
 			continue
