@@ -1,16 +1,15 @@
 package feed
 
 type FeedOutput struct {
-	Results []Results `json:"results"`
+	Results []Results `json:"result"`
 	Limit   int
 	Offset  int
 	Total   int
+	Data    []Data
 }
 
 type Results struct {
-	Result        string
-	Data          Data
-	Relationships []Relationships `json:"relationships"`
+	Result string
 }
 
 type Relationships struct {
@@ -19,9 +18,10 @@ type Relationships struct {
 }
 
 type Data struct {
-	Id         string
-	Type       string
-	Attributes Attributes
+	Id            string
+	Type          string
+	Attributes    Attributes
+	Relationships []Relationships `json:"relationships"`
 }
 
 type Attributes struct {
