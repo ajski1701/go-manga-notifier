@@ -16,9 +16,8 @@ func main() {
 	sessionToken := authentication.GetAuth(user_cfg)
 	manga := feed.GetFollowedMangaFeedList(sessionToken)
 	lastRunTime := config.ParseLastRunTime(app_cfg)
-	lastIndex := len(manga) - 1
 
-	for i, element := range manga {
+	for _, element := range manga {
 		chapterPublishDate := title.ParsePublishDate(element["publishedDate"])
 		if lastRunTime.After(chapterPublishDate) {
 			fmt.Println("Skipping alert for " + element["title"] + " Chapter " + element["chapter"] + ".")
@@ -33,10 +32,7 @@ func main() {
 		} else {
 			fmt.Println("Failed to send alert for " + element["title"] + " Chapter " + element["chapter"] + ".")
 		}
-
-		//If we're in the last item in the array update the app ini to include the last publish date of the manga for next run
-		if i == lastIndex {
-			config.UpdateAppIni(chapterPublishDate)
-		}
 	}
+	//Update the last run time ini
+	config.UpdateAppIni()
 }

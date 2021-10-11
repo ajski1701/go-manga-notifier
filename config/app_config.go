@@ -8,7 +8,7 @@ import (
 	"gopkg.in/ini.v1"
 )
 
-const appIniTemplate = `last_chapter_publish_time = `
+const appIniTemplate = `last_app_run_time = `
 
 const appIniName = "app_config.ini"
 
@@ -32,13 +32,14 @@ func createAppIni() {
 	cfg, err := ini.Load(appIniName)
 	check(err)
 	currentTime := time.Now()
-	cfg.Section("").Key("last_chapter_publish_time").SetValue(currentTime.Format(time.RFC3339))
+	cfg.Section("").Key("last_app_run_time").SetValue(currentTime.Format(time.RFC3339))
 	cfg.SaveTo(appIniName)
 }
 
-func UpdateAppIni(publishTime time.Time) {
+func UpdateAppIni() {
 	cfg, err := ini.Load(appIniName)
 	check(err)
-	cfg.Section("").Key("last_chapter_publish_time").SetValue(publishTime.Format(time.RFC3339))
+	currentTime := time.Now()
+	cfg.Section("").Key("last_app_run_time").SetValue(currentTime.Format(time.RFC3339))
 	cfg.SaveTo(appIniName)
 }
