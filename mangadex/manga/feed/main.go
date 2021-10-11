@@ -25,7 +25,7 @@ func GetFollowedMangaFeedList(token string) []map[string]string {
 	}
 	defer resp.Body.Close()
 
-	fmt.Println("Manga Feed Response status:", resp.Status)
+	fmt.Println(time.Now().Format(time.RFC3339), "Manga Feed Response status:", resp.Status)
 
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {

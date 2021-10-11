@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
+	"time"
 
 	"gopkg.in/ini.v1"
 )
@@ -23,7 +24,7 @@ func GetAuth(cfg *ini.File) string {
 	}
 	defer resp.Body.Close()
 
-	fmt.Println("Authentication Response status:", resp.Status)
+	fmt.Println(time.Now().Format(time.RFC3339), "Authentication Response status:", resp.Status)
 
 	if resp.Status != "200 OK" {
 		fmt.Println("Authentication failed. Exiting.")

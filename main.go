@@ -22,7 +22,7 @@ func main() {
 		chapterPublishDate := title.ParsePublishDate(element["publishedDate"])
 		logTime := time.Now().Format(time.RFC3339)
 		if lastRunTime.After(chapterPublishDate) {
-			fmt.Println(logTime + " Skipping alert for " + element["title"] + " Chapter " + element["chapter"] + ".")
+			fmt.Println(logTime, "Skipping alert for", element["title"], "Chapter", element["chapter"]+".")
 			continue
 		}
 
@@ -30,9 +30,9 @@ func main() {
 		alert, err := gomail.SendEmailSMTP(to_email, emailBody, element["title"], user_cfg)
 
 		if err == nil && alert {
-			fmt.Println(logTime + " Alert sent for " + element["title"] + " Chapter " + element["chapter"] + ".")
+			fmt.Println(logTime, "Alert sent for", element["title"], "Chapter", element["chapter"]+".")
 		} else {
-			fmt.Println(logTime + " Failed to send alert for " + element["title"] + " Chapter " + element["chapter"] + ".")
+			fmt.Println(logTime, "Failed to send alert for", element["title"], "Chapter", element["chapter"]+".")
 		}
 	}
 	//Update the last run time ini
