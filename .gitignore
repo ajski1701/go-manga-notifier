@@ -405,3 +405,5 @@ FodyWeavers.xsd
 *.sln.iml
 
 *.ini
+*.log
+*.txt
