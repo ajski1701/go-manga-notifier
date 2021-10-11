@@ -37,18 +37,18 @@ func GetFollowedMangaFeedList(token string) []map[string]string {
 	json.Unmarshal([]byte(body), &result)
 	//fmt.Println(string(body))
 
-	for i := range result.Results {
-		currentIndex := len(result.Results) - 1 - i
-		currentItem := result.Results[currentIndex]
-		language := currentItem.Data.Attributes.TranslatedLanguage
+	for i := range result.Data {
+		currentIndex := len(result.Data) - 1 - i
+		currentItem := result.Data[currentIndex]
+		language := currentItem.Attributes.TranslatedLanguage
 		if language != "en" {
 			continue
 		}
-		chapterNum := currentItem.Data.Attributes.Chapter
+		chapterNum := currentItem.Attributes.Chapter
 		mangaTitle := ""
-		chapterId := currentItem.Data.Id
+		chapterId := currentItem.Id
 		chapterUrl := "https://mangadex.org/chapter/" + chapterId
-		publishedDate := currentItem.Data.Attributes.PublishAt
+		publishedDate := currentItem.Attributes.PublishAt
 
 		parsedPublishDate, err := time.Parse(time.RFC3339, publishedDate)
 
