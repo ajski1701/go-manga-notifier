@@ -17,11 +17,14 @@ func main() {
 	sessionToken := authentication.GetAuth(user_cfg)
 	manga := feed.GetFollowedMangaFeedList(sessionToken)
 	lastRunTime := config.ParseLastRunTime(app_cfg)
+	newLastRunTime := time.Now()
 
 	for _, element := range manga {
 		chapterPublishDate := title.ParsePublishDate(element["publishedDate"])
+		newLastRunTime = chapterPublishDate
 		logTime := time.Now().Format(time.RFC3339)
-		if lastRunTime.After(chapterPublishDate) {
+
+		if lastRunTime.After(chapterPublishDate) || lastRunTime.Equal(chapterPublishDate) {
 			fmt.Println(logTime, "Skipping alert for", element["title"], "Chapter", element["chapter"]+".")
 			continue
 		}
@@ -36,5 +39,5 @@ func main() {
 		}
 	}
 	//Update the last run time ini
-	config.UpdateAppIni()
+	config.UpdateAppIni(newLastRunTime)
 }
