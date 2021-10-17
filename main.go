@@ -20,7 +20,7 @@ func main() {
 	newLastRunTime := time.Now()
 
 	for _, element := range manga {
-		chapterCreationDate := title.ParsePublishDate(element["createdDate"])
+		chapterCreationDate := title.ParseCreationDate(element["createdDate"])
 		newLastRunTime = chapterCreationDate
 		logTime := time.Now().Format(time.RFC3339)
 
