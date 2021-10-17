@@ -48,9 +48,9 @@ func GetFollowedMangaFeedList(token string) []map[string]string {
 		mangaTitle := ""
 		chapterId := currentItem.Id
 		chapterUrl := "https://mangadex.org/chapter/" + chapterId
-		publishedDate := currentItem.Attributes.PublishAt
+		createdDate := currentItem.Attributes.CreatedAt
 
-		parsedPublishDate, err := time.Parse(time.RFC3339, publishedDate)
+		parsedPublishDate, err := time.Parse(time.RFC3339, createdDate)
 
 		if err != nil {
 			panic(err)
@@ -66,7 +66,7 @@ func GetFollowedMangaFeedList(token string) []map[string]string {
 		localOutputMap["title"] = mangaTitle
 		localOutputMap["chapter"] = chapterNum
 		localOutputMap["url"] = chapterUrl
-		localOutputMap["publishedDate"] = parsedPublishDate.Format(time.RFC3339)
+		localOutputMap["createdDate"] = parsedPublishDate.Format(time.RFC3339)
 		outputArray = append(outputArray, localOutputMap)
 	}
 	return outputArray

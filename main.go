@@ -20,11 +20,11 @@ func main() {
 	newLastRunTime := time.Now()
 
 	for _, element := range manga {
-		chapterPublishDate := title.ParsePublishDate(element["publishedDate"])
-		newLastRunTime = chapterPublishDate
+		chapterCreationDate := title.ParsePublishDate(element["createdDate"])
+		newLastRunTime = chapterCreationDate
 		logTime := time.Now().Format(time.RFC3339)
 
-		if lastRunTime.After(chapterPublishDate) || lastRunTime.Equal(chapterPublishDate) {
+		if lastRunTime.After(chapterCreationDate) || lastRunTime.Equal(chapterCreationDate) {
 			fmt.Println(logTime, "Skipping alert for", element["title"], "Chapter", element["chapter"]+".")
 			continue
 		}
