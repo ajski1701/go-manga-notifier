@@ -4,9 +4,10 @@ import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
-	"mangadex-notifier/mangadex/manga/title"
 	"net/http"
 	"time"
+
+	"github.com/ajski1701/go-manga-notifier/mangadex/manga/title"
 )
 
 func GetFollowedMangaFeedList(token string) []map[string]string {
