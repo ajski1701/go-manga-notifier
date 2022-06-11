@@ -1,4 +1,4 @@
-module mangadex-notifier
+module github.com/ajski1701/go-manga-notifier
 
 go 1.16
 

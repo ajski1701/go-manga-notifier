@@ -2,12 +2,13 @@ package main
 
 import (
 	"fmt"
-	"mangadex-notifier/config"
-	"mangadex-notifier/gomail"
-	"mangadex-notifier/mangadex/authentication"
-	"mangadex-notifier/mangadex/manga/feed"
-	"mangadex-notifier/mangadex/manga/title"
 	"time"
+
+	"github.com/ajski1701/go-manga-notifier/config"
+	"github.com/ajski1701/go-manga-notifier/gomail"
+	"github.com/ajski1701/go-manga-notifier/mangadex/authentication"
+	"github.com/ajski1701/go-manga-notifier/mangadex/manga/feed"
+	"github.com/ajski1701/go-manga-notifier/mangadex/manga/title"
 )
 
 func main() {
