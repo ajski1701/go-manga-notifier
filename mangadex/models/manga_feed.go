@@ -1,30 +1,30 @@
-package feed
+package models
 
 type FeedOutput struct {
-	Results []Results `json:"result"`
+	Results []feedResults `json:"result"`
 	Limit   int
 	Offset  int
 	Total   int
-	Data    []Data
+	Data    []feedData
 }
 
-type Results struct {
+type feedResults struct {
 	Result string
 }
 
-type Relationships struct {
+type feedRelationships struct {
 	Id   string
 	Type string
 }
 
-type Data struct {
+type feedData struct {
 	Id            string
 	Type          string
-	Attributes    Attributes
-	Relationships []Relationships `json:"relationships"`
+	Attributes    feedAttributes
+	Relationships []feedRelationships `json:"relationships"`
 }
 
-type Attributes struct {
+type feedAttributes struct {
 	Title              string
 	Volume             string
 	Chapter            string

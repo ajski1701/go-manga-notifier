@@ -8,6 +8,7 @@ import (
 	"net/http"
 	"time"
 
+	"github.com/ajski1701/go-manga-notifier/mangadex/models"
 	"gopkg.in/ini.v1"
 )
 
@@ -37,7 +38,7 @@ func GetAuth(cfg *ini.File) string {
 		panic(err)
 	}
 
-	var result AuthOutput
+	var result models.AuthOutput
 	json.Unmarshal([]byte(body), &result)
 	sessionToken := result.Token.Session
 
