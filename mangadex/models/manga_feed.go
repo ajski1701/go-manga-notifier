@@ -1,4 +1,4 @@
-package structs
+package models
 
 type FeedOutput struct {
 	Results []feedResults `json:"result"`

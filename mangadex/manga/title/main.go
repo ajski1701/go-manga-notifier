@@ -6,7 +6,7 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/ajski1701/go-manga-notifier/mangadex/structs"
+	"github.com/ajski1701/go-manga-notifier/mangadex/models"
 )
 
 func ParseCreationDate(dateStr string) time.Time {
@@ -35,7 +35,7 @@ func GetTitle(mangaId string) string {
 		panic(err)
 	}
 
-	var result structs.MangaOutput
+	var result models.MangaOutput
 	json.Unmarshal([]byte(body), &result)
 	titleLanguage := ""
 	for element := range result.Data.Attributes.Title {

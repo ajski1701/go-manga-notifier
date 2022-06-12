@@ -8,7 +8,7 @@ import (
 	"time"
 
 	"github.com/ajski1701/go-manga-notifier/mangadex/manga/title"
-	"github.com/ajski1701/go-manga-notifier/mangadex/structs"
+	"github.com/ajski1701/go-manga-notifier/mangadex/models"
 )
 
 func GetFollowedMangaFeedList(token string) []map[string]string {
@@ -35,7 +35,7 @@ func GetFollowedMangaFeedList(token string) []map[string]string {
 	}
 
 	//fmt.Println(string([]byte(body)))
-	var result structs.FeedOutput
+	var result models.FeedOutput
 	json.Unmarshal([]byte(body), &result)
 	//fmt.Println(string(body))
 

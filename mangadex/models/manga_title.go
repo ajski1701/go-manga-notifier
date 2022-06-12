@@ -1,4 +1,4 @@
-package structs
+package models
 
 type MangaOutput struct {
 	Result string
