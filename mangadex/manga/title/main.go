@@ -4,7 +4,18 @@ import (
 	"encoding/json"
 	"io/ioutil"
 	"net/http"
+	"time"
+
+	"github.com/ajski1701/go-manga-notifier/mangadex/structs"
 )
+
+func ParseCreationDate(dateStr string) time.Time {
+	timeParsed, err := time.Parse(time.RFC3339, dateStr)
+	if err != nil {
+		panic(err)
+	}
+	return timeParsed
+}
 
 func GetTitle(mangaId string) string {
 	url := "https://api.mangadex.org/manga/" + mangaId
@@ -24,7 +35,7 @@ func GetTitle(mangaId string) string {
 		panic(err)
 	}
 
-	var result MangaOutput
+	var result structs.MangaOutput
 	json.Unmarshal([]byte(body), &result)
 	titleLanguage := ""
 	for element := range result.Data.Attributes.Title {

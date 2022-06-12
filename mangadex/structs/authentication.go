@@ -1,4 +1,4 @@
-package authentication
+package structs
 
 type AuthOutput struct {
 	Result string
