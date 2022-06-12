@@ -2,10 +2,10 @@ package models
 
 type AuthOutput struct {
 	Result string
-	Token  Tokens
+	Token  authTokens
 }
 
-type Tokens struct {
+type authTokens struct {
 	Session string
 	Refresh string
 }
